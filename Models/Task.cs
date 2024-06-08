@@ -14,5 +14,7 @@ namespace MicrosoftWebApi.Models
         public string Description { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public string AssignedUserId { get; set; } 
     }
 }

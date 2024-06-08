@@ -1,5 +1,6 @@
 using MongoDB.Driver;
 using TaskListApp.Models;
+using System.Collections.Generic;
 
 namespace TaskListApp.Services
 {
@@ -22,6 +23,13 @@ namespace TaskListApp.Services
         {
             var user = _users.Find(u => u.Username == username && u.Password == password).SingleOrDefault();
             return user;
+        }
+
+    
+        // Get all users
+        public List<User> GetAllUsers()
+        {
+            return _users.Find(user => true).ToList();
         }
     }
 }

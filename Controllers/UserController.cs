@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using TaskListApp.Models;
 using TaskListApp.Services;
 
@@ -16,14 +17,14 @@ namespace TaskListApp.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(User registrationModel) // Update parameter type
+        public IActionResult Register(User registrationModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new User // Creating a User object from registration model
+            var user = new User
             {
                 Username = registrationModel.Username,
                 Password = registrationModel.Password,
@@ -49,6 +50,13 @@ namespace TaskListApp.Controllers
             }
 
             return Ok(user);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            var users = _userService.GetAllUsers();
+            return Ok(users);
         }
     }
 }

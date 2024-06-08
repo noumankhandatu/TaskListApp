@@ -62,5 +62,22 @@ namespace MicrosoftWebApi.Controllers
             _tasks.DeleteOne(task => task.Id == id);
             return NoContent();
         }
+
+        // New endpoint to assign task to user
+        [HttpPut("{id:length(24)}/assign/{userId:length(24)}")]
+        public IActionResult AssignTask(string id, string userId)
+        {
+            var task = _tasks.Find<TaskModel>(task => task.Id == id).FirstOrDefault();
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            // Set the AssignedUserId property of the task
+            task.AssignedUserId = userId;
+
+            _tasks.ReplaceOne(task => task.Id == id, task);
+            return NoContent();
+        }
     }
 }
