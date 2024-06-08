@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TaskListApp.Services;
 using TaskListApp.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver; // Add this using directive
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,21 @@ builder.Services.Configure<MongoDBSettings>(
 
 builder.Services.AddSingleton<MongoDBSettings>(sp =>
     sp.GetRequiredService<IOptions<MongoDBSettings>>().Value);
+
+// Register MongoDB client
+builder.Services.AddSingleton<IMongoClient>(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<MongoDBSettings>>().Value;
+    return new MongoClient(settings.ConnectionString);
+});
+
+// Register MongoDB database
+builder.Services.AddScoped<IMongoDatabase>(sp =>
+{
+    var client = sp.GetRequiredService<IMongoClient>();
+    var settings = sp.GetRequiredService<IOptions<MongoDBSettings>>().Value;
+    return client.GetDatabase(settings.DatabaseName);
+});
 
 builder.Services.AddSingleton<HelloWorldService>();
 
