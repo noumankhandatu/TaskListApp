@@ -39,17 +39,21 @@ namespace MicrosoftWebApi.Controllers
             return CreatedAtRoute("GetTask", new { id = task.Id.ToString() }, task);
         }
 
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, TaskModel taskIn)
-        {
-            var task = _tasks.Find<TaskModel>(task => task.Id == id).FirstOrDefault();
-            if (task == null)
-            {
-                return NotFound();
-            }
-            _tasks.ReplaceOne(task => task.Id == id, taskIn);
-            return NoContent();
-        }
+       [HttpPut("{id:length(24)}")]
+      public IActionResult Update(string id, TaskModel taskIn)
+       {
+    var existingTask = _tasks.Find<TaskModel>(task => task.Id == id).FirstOrDefault();
+    if (existingTask == null)
+    {
+        return NotFound();
+    }
+
+    // Ensure that the _id field is not modified
+    taskIn.Id = existingTask.Id;
+
+    _tasks.ReplaceOne(task => task.Id == id, taskIn);
+    return NoContent();
+     }
 
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
@@ -79,5 +83,12 @@ namespace MicrosoftWebApi.Controllers
             _tasks.ReplaceOne(task => task.Id == id, task);
             return NoContent();
         }
+
+        [HttpGet("user/{userId:length(24)}")]
+public ActionResult<List<TaskModel>> GetTasksByUserId(string userId)
+{
+    var tasks = _tasks.Find<TaskModel>(task => task.AssignedUserId == userId).ToList();
+    return Ok(tasks);
+}
     }
 }
