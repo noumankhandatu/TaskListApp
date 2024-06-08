@@ -1,8 +1,12 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TaskListApp.Services;
+using Microsoft.Extensions.Hosting;
 using TaskListApp.Models;
+using TaskListApp.Services;
 using Microsoft.Extensions.Options;
-using MongoDB.Driver; // Add this using directive
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +32,8 @@ builder.Services.AddScoped<IMongoDatabase>(sp =>
     return client.GetDatabase(settings.DatabaseName);
 });
 
-builder.Services.AddSingleton<HelloWorldService>();
+// Add UserService
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
