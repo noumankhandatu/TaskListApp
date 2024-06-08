@@ -1,5 +1,5 @@
-using TaskListApp.Models;
 using MongoDB.Driver;
+using TaskListApp.Models;
 
 namespace TaskListApp.Services
 {
@@ -14,8 +14,13 @@ namespace TaskListApp.Services
 
         public User Register(User user)
         {
-            // Insert the user document into the MongoDB collection
             _users.InsertOne(user);
+            return user;
+        }
+
+        public User Authenticate(string username, string password)
+        {
+            var user = _users.Find(u => u.Username == username && u.Password == password).SingleOrDefault();
             return user;
         }
     }

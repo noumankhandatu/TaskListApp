@@ -16,18 +16,39 @@ namespace TaskListApp.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(User user)
+        public IActionResult Register(User registrationModel) // Update parameter type
         {
-            // Validate user input
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            // Add user to database
-            var registeredUser = _userService.Register(user);
+            var user = new User // Creating a User object from registration model
+            {
+                Username = registrationModel.Username,
+                Password = registrationModel.Password,
+                Role = registrationModel.Role
+            };
 
-            return Ok(registeredUser);
+            var registeredUser = _userService.Register(user);
+            return CreatedAtAction(nameof(Register), new { id = registeredUser.Id }, registeredUser);
+        }
+
+        [HttpPost("login")]
+        public IActionResult Login(LoginModel loginModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = _userService.Authenticate(loginModel.Username, loginModel.Password);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(user);
         }
     }
 }
