@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "2XUZMPwVfAU12WXi8bipP/LVhjOjqH8Q35vaxnDXCpU=",
+  "Source": "TaskListApp",
+  "BasePath": "_content/TaskListApp",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
