@@ -19,6 +19,10 @@ namespace TaskListApp.Services
             return user;
         }
 
+        public User GetUserByUsername(string username)
+        {
+            return _users.Find(u => u.Username == username).SingleOrDefault();
+        }
         public User Authenticate(string username, string password)
         {
             var user = _users.Find(u => u.Username == username && u.Password == password).SingleOrDefault();

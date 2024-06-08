@@ -16,24 +16,32 @@ namespace TaskListApp.Controllers
             _userService = userService;
         }
 
-        [HttpPost("register")]
-        public IActionResult Register(User registrationModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+      [HttpPost("register")]
+public IActionResult Register(User registrationModel)
+{
+    if (!ModelState.IsValid)
+    {
+        return BadRequest(ModelState);
+    }
 
-            var user = new User
-            {
-                Username = registrationModel.Username,
-                Password = registrationModel.Password,
-                Role = registrationModel.Role
-            };
+    // Check if the username already exists
+    var existingUser = _userService.GetUserByUsername(registrationModel.Username);
+    if (existingUser != null)
+    {
+        // User with the same username already exists, return a conflict response
+        return Conflict("Username is already taken.");
+    }
 
-            var registeredUser = _userService.Register(user);
-            return CreatedAtAction(nameof(Register), new { id = registeredUser.Id }, registeredUser);
-        }
+    var user = new User
+    {
+        Username = registrationModel.Username,
+        Password = registrationModel.Password,
+        Role = registrationModel.Role
+    };
+
+    var registeredUser = _userService.Register(user);
+    return CreatedAtAction(nameof(Register), new { id = registeredUser.Id }, registeredUser);
+}
 
         [HttpPost("login")]
         public IActionResult Login(LoginModel loginModel)
