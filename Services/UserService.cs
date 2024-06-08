@@ -25,7 +25,14 @@ namespace TaskListApp.Services
             return user;
         }
 
-    
+        // // Assign a task to a user by task ID and user ID
+        // public void AssignTaskToUser(string taskId, string userId)
+        // {
+        //     var filter = Builders<User>.Filter.Eq(u => u.Id, userId);
+        //     var update = Builders<User>.Update.Push(u => u.AssignedTasks, taskId);
+        //     _users.UpdateOne(filter, update);
+        // }
+
         // Get all users
         public List<User> GetAllUsers()
         {
