@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zr1XwNTgnuOQZ44ndq33ZRF3ixesEllgckkSe1/yNHRvLg06SW5NwYnD+svxLEkyNxvVfu89y9/t3mgZmpFK7w==",
+  "dgSpecHash": "tyDLsn6+9AE/qkQOpLAoKHqNt+YGarpV7rM6f1YJu8tdpajJrSJ91lXi5UUSDQ28TZ4Jhsx08yAkuIZiLylUtg==",
   "success": true,
-  "projectFilePath": "C:\\Work\\Freelance\\TaskListApp\\TaskListApp.csproj",
+  "projectFilePath": "C:\\Work\\Freelance\\Task\\imparta-server\\TaskListApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nouma\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\nouma\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

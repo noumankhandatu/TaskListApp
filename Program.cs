@@ -36,6 +36,19 @@ builder.Services.AddScoped<IMongoDatabase>(sp =>
 builder.Services.AddScoped<UserService>();
 
 builder.Services.AddControllers();
+
+// Add CORS services and configure the policy to allow all origins
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -50,6 +63,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+// Use the CORS policy
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 

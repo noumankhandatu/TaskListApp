@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Work\\Freelance\\TaskListApp\\TaskListApp.csproj": {}
+    "C:\\Work\\Freelance\\Task\\imparta-server\\TaskListApp.csproj": {}
   },
   "projects": {
-    "C:\\Work\\Freelance\\TaskListApp\\TaskListApp.csproj": {
+    "C:\\Work\\Freelance\\Task\\imparta-server\\TaskListApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Work\\Freelance\\TaskListApp\\TaskListApp.csproj",
+        "projectUniqueName": "C:\\Work\\Freelance\\Task\\imparta-server\\TaskListApp.csproj",
         "projectName": "TaskListApp",
-        "projectPath": "C:\\Work\\Freelance\\TaskListApp\\TaskListApp.csproj",
+        "projectPath": "C:\\Work\\Freelance\\Task\\imparta-server\\TaskListApp.csproj",
         "packagesPath": "C:\\Users\\nouma\\.nuget\\packages\\",
-        "outputPath": "C:\\Work\\Freelance\\TaskListApp\\obj\\",
+        "outputPath": "C:\\Work\\Freelance\\Task\\imparta-server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nouma\\AppData\\Roaming\\NuGet\\NuGet.Config"
